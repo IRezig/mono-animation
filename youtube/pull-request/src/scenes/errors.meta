@@ -1,0 +1,10 @@
+{
+  "version": 0,
+  "timeEvents": [
+    {
+      "name": "show_renderer",
+      "targetTime": 0.22460965364191166
+    }
+  ],
+  "seed": 2368736826
+}

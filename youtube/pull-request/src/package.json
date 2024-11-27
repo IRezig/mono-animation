@@ -1,0 +1,24 @@
+{
+  "name": "coding-diaries",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "start": "vite",
+    "serve": "vite",
+    "build": "tsc && vite build"
+  },
+  "dependencies": {
+    "@codemirror/language": "^6.10.3",
+    "@lezer/javascript": "^1.4.19",
+    "@motion-canvas/2d": "^3.17.1",
+    "@motion-canvas/core": "^3.17.0",
+    "@motion-canvas/ffmpeg": "^1.1.1"
+  },
+  "devDependencies": {
+    "@motion-canvas/ui": "^3.17.0",
+    "@motion-canvas/vite-plugin": "^3.17.0",
+    "prettier": "3.3.3",
+    "typescript": "^5.2.2",
+    "vite": "^4.0.0"
+  }
+}
