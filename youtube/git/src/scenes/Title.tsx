@@ -34,23 +34,34 @@ export default makeScene2D(function* (view) {
   const p1: LinkProps = {
     color: 'lightseagreen',
     nodePosition: [-330, 350],
-    direction: 'up',
-    lineSize: 300,
+    lineUp: {
+      color: 'lightseagreen',
+      points: [
+        [0, 0],
+        [0, -100],
+      ],
+    },
   };
   const p2: LinkProps = {
-    color: 'lightseagreen',
+    color: 'blue',
     nodePosition: [-330, -350],
-    direction: 'up',
-    lineSize: 300,
+    lineRight: {
+      color: 'blue',
+      points: [
+        [0, 0],
+        [100, 0],
+      ],
+    },
   };
   const p3: LinkProps = {
-    color: 'lightseagreen',
+    color: 'red',
     nodePosition: [330, -350],
-    direction: 'up',
-    lineSize: 300,
     lineUp: {
       color: 'red',
-      size: 300,
+      points: [
+        [0, 0],
+        [0, -100],
+      ],
     },
   };
 

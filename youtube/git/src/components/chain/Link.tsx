@@ -2,31 +2,33 @@ import {Circle, Line, Node, View2D} from '@motion-canvas/2d';
 import {waitFor} from '@motion-canvas/core';
 import {createRef} from '@motion-canvas/core/lib/utils';
 
+export interface LineProps {
+  color: string;
+  points: number[][];
+}
+
 export interface LinkProps {
   color?: string;
   nodePosition: [number, number];
-  direction: 'up' | 'down';
   circleSize?: number;
   borderWidth?: number;
-  lineUp?: {
-    color: string;
-    size: number;
-    points: number[];
-  };
+  lineUp?: LineProps;
+  lineRight?: LineProps;
 }
 export default function (
   view: View2D,
   {
     color,
     nodePosition,
-    direction,
     lineUp,
+    lineRight,
     circleSize = 60,
     borderWidth = 8,
   }: LinkProps,
 ) {
   const circ = createRef<Circle>();
-  const link = createRef<Line>();
+  const linkUp = createRef<Line>();
+  const linkRight = createRef<Line>();
 
   view.add(
     <Node position={nodePosition}>
@@ -40,17 +42,31 @@ export default function (
       />
       {lineUp && (
         <Line
-          ref={link}
+          ref={linkUp}
           position={[0, 0]}
-          stroke={color}
+          stroke={lineUp.color}
           lineWidth={8}
           end={0}
-          points={[
-            [0, -(circleSize / 2 + borderWidth / 2)],
-            [0, -(circleSize / 2 + lineUp.size)],
-          ]}
+          points={lineUp.points.map(p => [
+            p[0],
+            p[1] - (circleSize / 2 + borderWidth / 2),
+          ])}
         />
       )}
+      {lineRight && (
+        <Line
+          ref={linkRight}
+          position={[0, 0]}
+          stroke={lineRight.color}
+          lineWidth={8}
+          end={0}
+          points={lineRight.points.map(p => [
+            p[0] + (circleSize / 2 + borderWidth / 2),
+            p[1],
+          ])}
+        />
+      )}
+
       {/* <Circle size={5} fill={'red'} position={[0, 0]} /> */}
     </Node>,
   );
@@ -58,7 +74,8 @@ export default function (
     animate: function* (waitingTime = 0) {
       if (waitingTime) yield* waitFor(waitingTime);
       yield* circ().scale(1, 0.5);
-      yield* link().end(1, 0.6);
+      if (lineUp) yield* linkUp().end(1, 0.6);
+      if (lineRight) yield* linkRight().end(1, 0.6);
     },
   };
 }
