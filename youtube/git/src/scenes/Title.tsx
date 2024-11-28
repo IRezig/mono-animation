@@ -1,66 +1,62 @@
-import {Circle, Line, makeScene2D, Rect} from '@motion-canvas/2d';
-import {createRef} from '@motion-canvas/core/lib/utils';
+import {makeScene2D, Rect} from '@motion-canvas/2d';
+import {all} from '@motion-canvas/core';
+import Link, {LinkProps} from '../components/chain/Link';
 
 export default makeScene2D(function* (view) {
   view.add(<Rect fill={'#27262f'} width={view.width} height={view.height} />);
-  const circ = createRef<Circle>();
-  const link = createRef<Line>();
-  const circ2 = createRef<Circle>();
-  const link2 = createRef<Line>();
 
-  view.add(
-    <>
-      <>
-        <Circle
-          ref={circ}
-          size={80}
-          stroke={'lightseagreen'}
-          lineWidth={8}
-          startAngle={-90}
-          endAngle={90}
-          position={[-330, 450]}
-        />
-        <Line
-          ref={link}
-          position={[-30, 310]}
-          stroke={'lightseagreen'}
-          lineWidth={8}
-          lineDashOffset={() => 20}
-          end={0}
-          points={[
-            [-300, 100],
-            [-300, 0],
-          ]}
-        />
-      </>
-      <>
-        <Circle
-          ref={circ2}
-          size={80}
-          stroke={'lightseagreen'}
-          lineWidth={8}
-          startAngle={-90}
-          endAngle={90}
-          position={[-330, 270]}
-        />
-        <Line
-          ref={link2}
-          position={[-30, 30]}
-          stroke={'lightseagreen'}
-          lineWidth={8}
-          lineDashOffset={() => 20}
-          end={0}
-          points={[
-            [-300, 200],
-            [-300, 100],
-          ]}
-        />
-      </>
-    </>,
-  );
+  // const objects: LinkProps[] = [
+  //   {
+  //     color: 'lightseagreen',
+  //     nodePosition: [-330, 450],
+  //     direction: 'up',
+  //     lineSize: 300,
+  //   },
+  //   {
+  //     color: 'lightseagreen',
+  //     nodePosition: [-330, 50],
+  //     direction: 'up',
+  //     lineSize: 300,
+  //   },
+  //   {
+  //     color: 'lightseagreen',
+  //     nodePosition: [-330, -350],
+  //     direction: 'up',
+  //     lineSize: 300,
+  //   },
+  //   {
+  //     color: 'lightseagreen',
+  //     nodePosition: [-30, 450],
+  //     direction: 'up',
+  //     lineSize: 300,
+  //   },
+  // ];
+  const p1: LinkProps = {
+    color: 'lightseagreen',
+    nodePosition: [-330, 350],
+    direction: 'up',
+    lineSize: 300,
+  };
+  const p2: LinkProps = {
+    color: 'lightseagreen',
+    nodePosition: [-330, -350],
+    direction: 'up',
+    lineSize: 300,
+  };
+  const p3: LinkProps = {
+    color: 'lightseagreen',
+    nodePosition: [330, -350],
+    direction: 'up',
+    lineSize: 300,
+    lineUp: {
+      color: 'red',
+      size: 300,
+    },
+  };
 
-  yield* circ().startAngle(-270, 0.5);
-  yield* link().end(2, 0.6);
-  yield* circ2().startAngle(-270, 0.5);
-  yield* link2().end(2, 0.6);
+  const p1refs = Link(view, p1);
+  const p2refs = Link(view, p2);
+  const p3refs = Link(view, p3);
+  yield* p1refs.animate();
+  yield* all(p2refs.animate(0.2), p3refs.animate());
 });

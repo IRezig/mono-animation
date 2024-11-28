@@ -1,6 +1,8 @@
 import {makeScene2D} from '@motion-canvas/2d';
+import {Circle, Line, Node, Rect, Txt} from '@motion-canvas/2d/lib/components';
 import {all, chain, delay, loop, waitUntil} from '@motion-canvas/core/lib/flow';
-import {Circle, Node, Line, Rect, Txt} from '@motion-canvas/2d/lib/components';
+import {cancel, join} from '@motion-canvas/core/lib/threading';
+import {easeOutCubic, linear} from '@motion-canvas/core/lib/tweening';
 import {
   createRef,
   makeRef,
@@ -8,8 +10,6 @@ import {
   useRandom,
   useScene,
 } from '@motion-canvas/core/lib/utils';
-import {easeOutCubic, linear} from '@motion-canvas/core/lib/tweening';
-import {cancel, join} from '@motion-canvas/core/lib/threading';
 
 const positions = [
   [813, -181],
@@ -147,7 +147,8 @@ export default makeScene2D(function* (view) {
         ref={circle}
         width={240}
         height={240}
-        fill={'#68ABDF'}
+        stroke={'#68ABDF'}
+        lineWidth={8}
       />
       <Rect
         ref={square}
