@@ -10,6 +10,7 @@
     "deferred-lighting": "npm run serve -w youtube/deferred-lighting",
     "motion-canvas": "npm run serve -w youtube/motion-canvas",
     "pull-request": "npm run serve -w youtube/pull-request",
+    "git": "npm run serve -w youtube/git",
     "logo": "npm run serve -w youtube/logo",
     "lint": "eslint \"youtube/**/src/**/*.ts?(x)\"",
     "lint:fix": "eslint --fix \"youtube/**/src/**/*.ts?(x)\"",
@@ -27,12 +28,13 @@
     "@lezer/python": "^1.1.11",
     "@lezer/rust": "^1.0.2",
     "@lezer/yaml": "^1.0.2",
-    "@motion-canvas/2d": "3.15.0",
-    "@motion-canvas/core": "3.15.0"
+    "@motion-canvas/2d": "3.17.0",
+    "@motion-canvas/core": "3.17.0",
+    "@motion-canvas/ffmpeg": "^3.17.0"
   },
   "devDependencies": {
-    "@motion-canvas/vite-plugin": "3.14.1",
     "@motion-canvas/ui": "3.15.0",
+    "@motion-canvas/vite-plugin": "3.14.1",
     "@typescript-eslint/eslint-plugin": "^5.29.0",
     "@typescript-eslint/parser": "^5.29.0",
     "eslint": "^8.18.0",
