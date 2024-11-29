@@ -1,6 +1,6 @@
 import {Circle, Line, Node, View2D} from '@motion-canvas/2d';
 import {all, waitFor} from '@motion-canvas/core';
-import {createRef, makeRef} from '@motion-canvas/core/lib/utils';
+import {createRef} from '@motion-canvas/core/lib/utils';
 
 export interface LineProps {
   color: string;
@@ -53,36 +53,6 @@ export default function (
           lineWidth={lineUp.lineWidth}
           end={0}
           points={lineUp.points.map(p => [
-            p[0],
-            p[1] - (circleSize / 2 + borderWidth / 2),
-          ])}
-        />
-      )}
-      {linesRight &&
-        linesRight.length > 0 &&
-        linesRight.map((lineRight, i) => (
-          <Line
-            ref={makeRef(linkRight, i)}
-            position={[0, 0]}
-            stroke={lineRight.color}
-            lineWidth={lineRight.lineWidth}
-            end={0}
-            radius={lineRight.radius}
-            points={lineRight.points.map(p => [
-              p[0] + (circleSize / 2 + borderWidth / 2),
-              p[1],
-            ])}
-          />
-        ))}
-      {lineLeft && (
-        <Line
-          ref={linkUp}
-          position={[0, 0]}
-          stroke={lineLeft.color}
-          radius={lineLeft.radius}
-          lineWidth={lineLeft.lineWidth}
-          end={0}
-          points={lineLeft.points.map(p => [
             p[0],
             p[1] - (circleSize / 2 + borderWidth / 2),
           ])}
