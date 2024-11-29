@@ -50,16 +50,28 @@ export default makeScene2D(function* (view) {
         [0, -lineSize2],
       ],
     },
-    lineRight: {
-      radius,
-      color: mainBranchColor,
-      lineWidth,
-      points: [
-        [0, 0],
-        [lineSize, 0],
-        [lineSize, -lineSize / 2],
-      ],
-    },
+    linesRight: [
+      {
+        radius,
+        color: mainBranchColor,
+        lineWidth,
+        points: [
+          [0, 0],
+          [lineSize, 0],
+          [lineSize, -lineSize / 2],
+        ],
+      },
+      {
+        radius,
+        color: branch1Color,
+        lineWidth,
+        points: [
+          [0, 0],
+          [lineSize3, 0],
+          [lineSize3, -lineSize / 2],
+        ],
+      },
+    ],
   };
   const p111pos: [number, number] = [
     p11pos[0],
