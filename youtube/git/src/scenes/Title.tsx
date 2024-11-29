@@ -1,63 +1,118 @@
 import {makeScene2D, Rect} from '@motion-canvas/2d';
+import {waitFor} from '@motion-canvas/core';
 import Link, {LinkProps} from '../components/chain/Link';
 
 export default makeScene2D(function* (view) {
   view.add(<Rect fill={'#27262f'} width={view.width} height={view.height} />);
 
-  const lineSize = 200;
-  const p1pos: [number, number] = [-100, 300];
-  const circleSize = 120;
+  const lineSize = 100;
+  const lineSize2 = 200;
+  const lineSize3 = 300;
+  const circleSize = 60;
   const lineWidth = 8;
-  const borderWidth = 6;
+  const borderWidth = 8;
   const radius = 40;
+  const mainBranchColor = '#76389b';
+  const branch1Color = '#08a0bc';
+  const branch2Color = '#36ba96';
 
+  const p1pos: [number, number] = [-300, 600];
   const p1: LinkProps = {
-    color: '#76389b',
+    color: mainBranchColor,
     nodePosition: p1pos,
     circleSize,
     borderWidth,
     lineUp: {
       lineWidth,
       radius,
-      color: '#76389b',
+      color: mainBranchColor,
       points: [
         [0, 0],
         [0, -lineSize],
       ],
     },
   };
-  const p2pos: [number, number] = [
+  const p11pos: [number, number] = [
     p1pos[0],
     p1pos[1] - (lineSize + circleSize),
   ];
-  const p2: LinkProps = {
-    color: '#08a0bc',
-    nodePosition: p2pos,
+  const p11: LinkProps = {
+    color: mainBranchColor,
+    nodePosition: p11pos,
     circleSize,
     borderWidth,
+    lineUp: {
+      lineWidth,
+      radius,
+      color: mainBranchColor,
+      points: [
+        [0, 0],
+        [0, -lineSize2],
+      ],
+    },
     lineRight: {
       radius,
-      color: '#08a0bc',
+      color: mainBranchColor,
       lineWidth,
       points: [
         [0, 0],
         [lineSize, 0],
-        [lineSize, -lineSize],
+        [lineSize, -lineSize / 2],
       ],
     },
   };
-  const p3: LinkProps = {
-    color: '#36ba96',
+  const p111pos: [number, number] = [
+    p11pos[0],
+    p11pos[1] - (lineSize2 + circleSize),
+  ];
+  const p111: LinkProps = {
+    color: mainBranchColor,
+    nodePosition: p111pos,
     circleSize,
     borderWidth,
-    nodePosition: [
-      p2pos[0] + (lineSize + circleSize / 2 + lineWidth / 2),
-      p2pos[1] - (lineSize + circleSize / 2),
-    ],
     lineUp: {
       lineWidth,
       radius,
-      color: '#36ba96',
+      color: mainBranchColor,
+      points: [
+        [0, 0],
+        [0, -lineSize],
+      ],
+    },
+  };
+  const p1111pos: [number, number] = [
+    p111pos[0],
+    p111pos[1] - (lineSize + circleSize),
+  ];
+  const p1111: LinkProps = {
+    color: mainBranchColor,
+    nodePosition: p1111pos,
+    circleSize,
+    borderWidth,
+    lineUp: {
+      lineWidth,
+      radius,
+      color: mainBranchColor,
+      points: [
+        [0, 0],
+        [0, -lineSize3],
+      ],
+    },
+  };
+
+  const p3pos: [number, number] = [
+    p11pos[0] + (lineSize + circleSize / 2 + lineWidth / 2),
+    p11pos[1] - (lineSize / 2 + circleSize / 2),
+  ];
+  const p3: LinkProps = {
+    color: branch2Color,
+    circleSize,
+    borderWidth,
+    nodePosition: p3pos,
+    lineUp: {
+      lineWidth,
+      radius,
+      color: branch2Color,
       points: [
         [0, 0],
         [0, -lineSize],
@@ -65,10 +120,70 @@ export default makeScene2D(function* (view) {
     },
   };
 
+  const p33pos: [number, number] = [
+    p3pos[0],
+    p3pos[1] - (lineSize + circleSize),
+  ];
+  const p33: LinkProps = {
+    color: branch2Color,
+    circleSize,
+    borderWidth,
+    nodePosition: p33pos,
+    lineUp: {
+      lineWidth,
+      radius,
+      color: branch2Color,
+      points: [
+        [0, 0],
+        [0, -lineSize2],
+      ],
+    },
+  };
+
+  const p333pos: [number, number] = [
+    p33pos[0],
+    p33pos[1] - (lineSize2 + circleSize),
+  ];
+  const p333: LinkProps = {
+    color: branch2Color,
+    circleSize,
+    borderWidth,
+    nodePosition: p333pos,
+    lineUp: {
+      lineWidth,
+      radius,
+      color: branch2Color,
+      points: [
+        [0, 0],
+        [0, -lineSize],
+      ],
+    },
+    lineLeft: {
+      lineWidth,
+      radius,
+      color: branch2Color,
+      points: [
+        [0, 0],
+        [0, -lineSize2 - 50],
+        [-lineSize2 / 2, -lineSize2 - 50],
+      ],
+    },
+  };
+
   const p1refs = Link(view, p1);
-  const p2refs = Link(view, p2);
+  const p11refs = Link(view, p11);
+  const p111refs = Link(view, p111);
+  const p1111refs = Link(view, p1111);
   const p3refs = Link(view, p3);
+  const p33refs = Link(view, p33);
+  const p333refs = Link(view, p333);
   yield* p1refs.animate();
-  yield* p2refs.animate();
+  yield* p11refs.animate();
+  yield* p111refs.animate();
+  yield* p1111refs.animate();
   yield* p3refs.animate(0.2);
+  yield* p33refs.animate(0.2);
+  yield* p333refs.animate(0.2);
+
+  yield* waitFor(10);
 });

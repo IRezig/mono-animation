@@ -16,10 +16,19 @@ export interface LinkProps {
   borderWidth: number;
   lineUp?: LineProps;
   lineRight?: LineProps;
+  lineLeft?: LineProps;
 }
 export default function (
   view: View2D,
-  {color, nodePosition, lineUp, lineRight, circleSize, borderWidth}: LinkProps,
+  {
+    color,
+    nodePosition,
+    lineUp,
+    lineRight,
+    lineLeft,
+    circleSize,
+    borderWidth,
+  }: LinkProps,
 ) {
   const circ = createRef<Circle>();
   const linkUp = createRef<Line>();
@@ -63,15 +72,30 @@ export default function (
           ])}
         />
       )}
+      {lineLeft && (
+        <Line
+          ref={linkUp}
+          position={[0, 0]}
+          stroke={lineLeft.color}
+          radius={lineLeft.radius}
+          lineWidth={lineLeft.lineWidth}
+          end={0}
+          points={lineLeft.points.map(p => [
+            p[0],
+            p[1] - (circleSize / 2 + borderWidth / 2),
+          ])}
+        />
+      )}
       {/* <Circle size={5} fill={'red'} position={[0, 0]} /> */}
     </Node>,
   );
   return {
     animate: function* (waitingTime = 0) {
       if (waitingTime) yield* waitFor(waitingTime);
-      yield* all(circ().opacity(1, 0.35), circ().scale(1, 0.35));
-      if (lineUp) yield* linkUp().end(1, 0.6);
-      if (lineRight) yield* linkRight().end(1, 0.6);
+      yield* all(circ().opacity(1, 0.3), circ().scale(1, 0.3));
+      if (lineUp) yield* linkUp().end(1, 0.3);
+      if (lineRight) yield* linkRight().end(1, 0.3);
+      if (lineLeft) yield* linkUp().end(1, 0.3);
     },
   };
 }
