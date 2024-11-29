@@ -8,11 +8,17 @@ export default makeScene2D(function* (view) {
   const p1pos: [number, number] = [-100, 300];
   const circleSize = 120;
   const lineWidth = 8;
+  const borderWidth = 6;
+  const radius = 40;
 
   const p1: LinkProps = {
     color: '#76389b',
     nodePosition: p1pos,
+    circleSize,
+    borderWidth,
     lineUp: {
+      lineWidth,
+      radius,
       color: '#76389b',
       points: [
         [0, 0],
@@ -27,23 +33,30 @@ export default makeScene2D(function* (view) {
   const p2: LinkProps = {
     color: '#08a0bc',
     nodePosition: p2pos,
+    circleSize,
+    borderWidth,
     lineRight: {
+      radius,
       color: '#08a0bc',
+      lineWidth,
       points: [
         [0, 0],
         [lineSize, 0],
         [lineSize, -lineSize],
       ],
-      radius: 40,
     },
   };
   const p3: LinkProps = {
     color: '#36ba96',
+    circleSize,
+    borderWidth,
     nodePosition: [
       p2pos[0] + (lineSize + circleSize / 2 + lineWidth / 2),
       p2pos[1] - (lineSize + circleSize / 2),
     ],
     lineUp: {
+      lineWidth,
+      radius,
       color: '#36ba96',
       points: [
         [0, 0],

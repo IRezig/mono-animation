@@ -10,28 +10,20 @@ export interface LineProps {
 }
 
 export interface LinkProps {
-  color?: string;
+  color: string;
   nodePosition: [number, number];
-  circleSize?: number;
-  borderWidth?: number;
+  circleSize: number;
+  borderWidth: number;
   lineUp?: LineProps;
   lineRight?: LineProps;
 }
 export default function (
   view: View2D,
-  {
-    color,
-    nodePosition,
-    lineUp,
-    lineRight,
-    circleSize = 120,
-    borderWidth = 8,
-  }: LinkProps,
+  {color, nodePosition, lineUp, lineRight, circleSize, borderWidth}: LinkProps,
 ) {
   const circ = createRef<Circle>();
   const linkUp = createRef<Line>();
   const linkRight = createRef<Line>();
-  const defaultLineWidth = 8;
 
   view.add(
     <Node position={nodePosition}>
@@ -49,7 +41,7 @@ export default function (
           ref={linkUp}
           position={[0, 0]}
           stroke={lineUp.color}
-          lineWidth={lineUp.lineWidth ?? defaultLineWidth}
+          lineWidth={lineUp.lineWidth}
           end={0}
           points={lineUp.points.map(p => [
             p[0],
@@ -62,7 +54,7 @@ export default function (
           ref={linkRight}
           position={[0, 0]}
           stroke={lineRight.color}
-          lineWidth={lineRight.lineWidth ?? defaultLineWidth}
+          lineWidth={lineRight.lineWidth}
           end={0}
           radius={lineRight.radius}
           points={lineRight.points.map(p => [
