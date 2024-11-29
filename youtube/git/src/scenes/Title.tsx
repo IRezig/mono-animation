@@ -1,5 +1,5 @@
 import {makeScene2D, Rect} from '@motion-canvas/2d';
-import {waitFor} from '@motion-canvas/core';
+import {all} from '@motion-canvas/core';
 import Link, {LinkProps} from '../components/chain/Link';
 
 export default makeScene2D(function* (view) {
@@ -279,24 +279,20 @@ export default makeScene2D(function* (view) {
   const p11refs = Link(view, p11);
   const p111refs = Link(view, p111);
   const p1111refs = Link(view, p1111);
+  const p2refs = Link(view, p2);
+  const p22refs = Link(view, p22);
   const p3refs = Link(view, p3);
   const p33refs = Link(view, p33);
   const p333refs = Link(view, p333);
   const p4refs = Link(view, p4);
   const p44refs = Link(view, p44);
-  const p2refs = Link(view, p2);
-  const p22refs = Link(view, p22);
+
   yield* p1refs.animate();
   yield* p11refs.animate();
+  yield* all(p3refs.animate(), p4refs.animate());
   yield* p111refs.animate();
+  yield* all(p33refs.animate());
   yield* p1111refs.animate();
-  yield* p3refs.animate(0.2);
-  yield* p33refs.animate(0.2);
-  yield* p333refs.animate(0.2);
-  yield* p4refs.animate(0.2);
-  yield* p44refs.animate(0.2);
-  yield* p2refs.animate(0.2);
-  yield* p22refs.animate(0.2);
-
-  yield* waitFor(10);
+  yield* p2refs.animate();
+  yield* all(p22refs.animate(), p333refs.animate(), p44refs.animate());
 });
