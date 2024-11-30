@@ -1,5 +1,5 @@
 import {makeScene2D, Rect} from '@motion-canvas/2d';
-import {all} from '@motion-canvas/core';
+import {all, waitFor} from '@motion-canvas/core';
 import Link, {LinkProps} from '../components/chain/Link';
 
 export default makeScene2D(function* (view) {
@@ -32,6 +32,15 @@ export default makeScene2D(function* (view) {
         [0, -lineSize],
       ],
     },
+    lineDown: {
+      lineWidth,
+      radius,
+      color: mainBranchColor,
+      points: [
+        [0, 0],
+        [0, lineSize / 2],
+      ],
+    },
   };
   const p11pos: [number, number] = [
     p1pos[0],
@@ -51,28 +60,6 @@ export default makeScene2D(function* (view) {
         [0, -lineSize],
       ],
     },
-    linesRight: [
-      {
-        radius,
-        color: branch2Color,
-        lineWidth,
-        points: [
-          [0, 0],
-          [lineSize, 0],
-          [lineSize, -lineSize / 2],
-        ],
-      },
-      {
-        radius,
-        color: branch1Color,
-        lineWidth,
-        points: [
-          [0, 0],
-          [lineSize2, 0],
-          [lineSize2, -lineSize2],
-        ],
-      },
-    ],
   };
   const p111pos: [number, number] = [
     p11pos[0],
@@ -102,18 +89,6 @@ export default makeScene2D(function* (view) {
     nodePosition: p1111pos,
     circleSize,
     borderWidth,
-    linesRight: [
-      {
-        radius,
-        color: branch3Color,
-        lineWidth,
-        points: [
-          [0, 0],
-          [lineSize3, 0],
-          [lineSize3, -lineSize],
-        ],
-      },
-    ],
     lineUp: {
       lineWidth,
       radius,
@@ -141,6 +116,16 @@ export default makeScene2D(function* (view) {
       points: [
         [0, 0],
         [0, -lineSize],
+      ],
+    },
+    lineDown: {
+      lineWidth,
+      radius,
+      color: branch2Color,
+      points: [
+        [0, 0],
+        [0, lineSize / 2],
+        [-lineSize, lineSize / 2],
       ],
     },
   };
@@ -174,16 +159,6 @@ export default makeScene2D(function* (view) {
     circleSize,
     borderWidth,
     nodePosition: p333pos,
-    lineLeft: {
-      lineWidth,
-      radius,
-      color: branch2Color,
-      points: [
-        [0, 0],
-        [0, -lineSize2 - 50],
-        [-lineSize2 / 2, -lineSize2 - 50],
-      ],
-    },
   };
 
   const p4pos: [number, number] = [
@@ -204,6 +179,16 @@ export default makeScene2D(function* (view) {
         [0, -lineSize3],
       ],
     },
+    lineDown: {
+      lineWidth,
+      radius,
+      color: branch1Color,
+      points: [
+        [0, 0],
+        [0, lineSize / 2],
+        [-lineSize2, lineSize / 2],
+      ],
+    },
   };
   const p44pos: [number, number] = [
     p4pos[0],
@@ -214,7 +199,7 @@ export default makeScene2D(function* (view) {
     circleSize,
     borderWidth,
     nodePosition: p44pos,
-    lineLeft: {
+    lineDown: {
       lineWidth,
       radius,
       color: branch1Color,
@@ -244,6 +229,16 @@ export default makeScene2D(function* (view) {
         [0, -lineSize3],
       ],
     },
+    lineDown: {
+      lineWidth,
+      radius,
+      color: branch3Color,
+      points: [
+        [0, 0],
+        [0, lineSize2 / 2],
+        [-lineSize3, lineSize2 / 2],
+      ],
+    },
   };
   const p22pos: [number, number] = [
     p2pos[0],
@@ -254,7 +249,7 @@ export default makeScene2D(function* (view) {
     circleSize,
     borderWidth,
     nodePosition: p22pos,
-    lineLeft: {
+    lineUp: {
       lineWidth,
       radius,
       color: branch3Color,
@@ -286,4 +281,6 @@ export default makeScene2D(function* (view) {
   yield* p1111refs.animate();
   yield* p2refs.animate();
   yield* all(p22refs.animate(), p333refs.animate(), p44refs.animate());
+
+  yield* waitFor(10);
 });
