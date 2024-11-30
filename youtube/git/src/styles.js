@@ -1,7 +1,7 @@
 export const Colors = {
   whiteLabel: 'rgba(255, 255, 255, 0.54)',
   blackLabel: 'rgba(0, 0, 0, 0.87)',
-  background: '#141414',
+  background: '#27262f',
   surface: '#242424',
   surfaceLight: '#c0b3a3',
 
@@ -16,6 +16,9 @@ export const Colors = {
   red: '#ef5350',
   green: '#8bc34a',
   blue: '#2196f3',
+
+  mainBranch: '#76389b',
+  featureBranch: '#36ba96',
 };
 
 export const BaseFont = {
