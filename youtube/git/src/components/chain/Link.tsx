@@ -94,14 +94,14 @@ export default function (
   return {
     animate: function* (waitingTime = 0) {
       if (waitingTime) yield* waitFor(waitingTime);
-      yield* all(circ().opacity(1, 0.1), circ().scale(1, 0.1));
-      if (lineUp) yield* linkUp().end(1, 0.1);
+      yield* all(circ().opacity(1, 0.2), circ().scale(1, 0.2));
+      if (lineUp) yield* linkUp().end(1, 0.2);
       if (linesRight) {
         for (const l of linkRight) {
-          yield* l.end(1, 0.1);
+          yield* l.end(1, 0.2);
         }
       }
-      if (lineLeft) yield* linkUp().end(1, 0.1);
+      if (lineLeft) yield* linkUp().end(1, 0.2);
     },
   };
 }
