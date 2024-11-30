@@ -15,7 +15,7 @@ export default makeScene2D(function* (view) {
   const borderWidth = 10;
   const radius = 40;
   const mainBranchColor = '#76389b';
-  const branch2Color = '#36ba96';
+  const featureBranchColor = '#36ba96';
 
   const p1pos: [number, number] = [-300, 850];
   const p1: LinkProps = {
@@ -54,7 +54,7 @@ export default makeScene2D(function* (view) {
     linesRight: [
       {
         radius,
-        color: branch2Color,
+        color: featureBranchColor,
         lineWidth,
         points: [
           [0, 0],
@@ -103,19 +103,78 @@ export default makeScene2D(function* (view) {
     },
   };
 
-  const p3pos: [number, number] = [
+  const pn21pos: [number, number] = [
+    p1111pos[0],
+    p1111pos[1] - (lineSize2 + circleSize),
+  ];
+  const pn21: LinkProps = {
+    color: featureBranchColor,
+    nodePosition: pn21pos,
+    circleSize,
+    borderWidth,
+    lineUp: {
+      lineWidth,
+      radius,
+      color: featureBranchColor,
+      points: [
+        [0, 0],
+        [0, -lineSize],
+      ],
+    },
+  };
+
+  const pn22pos: [number, number] = [
+    pn21pos[0],
+    pn21pos[1] - (lineSize + circleSize),
+  ];
+  const pn22: LinkProps = {
+    color: featureBranchColor,
+    nodePosition: pn22pos,
+    circleSize,
+    borderWidth,
+    lineUp: {
+      lineWidth,
+      radius,
+      color: featureBranchColor,
+      points: [
+        [0, 0],
+        [0, -lineSize],
+      ],
+    },
+  };
+  const pn23pos: [number, number] = [
+    pn22pos[0],
+    pn22pos[1] - (lineSize + circleSize),
+  ];
+  const pn23: LinkProps = {
+    color: featureBranchColor,
+    nodePosition: pn23pos,
+    circleSize,
+    borderWidth,
+    lineUp: {
+      lineWidth,
+      radius,
+      color: featureBranchColor,
+      points: [
+        [0, 0],
+        [0, -lineSize],
+      ],
+    },
+  };
+
+  const p2pos: [number, number] = [
     p11pos[0] + (lineSize2 + circleSize / 2 + lineWidth / 2),
     p11pos[1] - (lineSize2 / 2 + circleSize / 2),
   ];
-  const p3: LinkProps = {
-    color: branch2Color,
+  const p2: LinkProps = {
+    color: featureBranchColor,
     circleSize,
     borderWidth,
-    nodePosition: p3pos,
+    nodePosition: p2pos,
     lineUp: {
       lineWidth,
       radius,
-      color: branch2Color,
+      color: featureBranchColor,
       points: [
         [0, 0],
         [0, -lineSize2],
@@ -123,19 +182,19 @@ export default makeScene2D(function* (view) {
     },
   };
 
-  const p33pos: [number, number] = [
-    p3pos[0],
-    p3pos[1] - (lineSize2 + circleSize),
+  const p22pos: [number, number] = [
+    p2pos[0],
+    p2pos[1] - (lineSize2 + circleSize),
   ];
-  const p33: LinkProps = {
-    color: branch2Color,
+  const p22: LinkProps = {
+    color: featureBranchColor,
     circleSize,
     borderWidth,
-    nodePosition: p33pos,
+    nodePosition: p22pos,
     lineUp: {
       lineWidth,
       radius,
-      color: branch2Color,
+      color: featureBranchColor,
       points: [
         [0, 0],
         [0, -lineSize2],
@@ -143,15 +202,15 @@ export default makeScene2D(function* (view) {
     },
   };
 
-  const p333pos: [number, number] = [
-    p33pos[0],
-    p33pos[1] - (lineSize2 + circleSize),
+  const p222pos: [number, number] = [
+    p22pos[0],
+    p22pos[1] - (lineSize2 + circleSize),
   ];
-  const p333: LinkProps = {
-    color: branch2Color,
+  const p222: LinkProps = {
+    color: featureBranchColor,
     circleSize,
     borderWidth,
-    nodePosition: p333pos,
+    nodePosition: p222pos,
   };
 
   view.add(
@@ -166,7 +225,7 @@ export default makeScene2D(function* (view) {
       <Txt
         fill={'white'}
         fontSize={50}
-        position={[200, -400]}
+        position={[200, -150]}
         ref={featureBranch}
       />
       <Line
@@ -177,11 +236,11 @@ export default makeScene2D(function* (view) {
         radius={20}
         end={0}
         points={[
-          [p3pos[0] - 100, p3pos[1] + 100],
-          [p333pos[0] - 100, p333pos[1] - 100],
-          [p333pos[0] + 100, p333pos[1] - 100],
-          [p3pos[0] + 100, p3pos[1] + 100],
-          [p3pos[0] - 100, p3pos[1] + 100],
+          [p2pos[0] - 100, p2pos[1] + 100],
+          [p222pos[0] - 100, p222pos[1] - 100],
+          [p222pos[0] + 100, p222pos[1] - 100],
+          [p2pos[0] + 100, p2pos[1] + 100],
+          [p2pos[0] - 100, p2pos[1] + 100],
         ]}
       />
     </>,
@@ -191,9 +250,12 @@ export default makeScene2D(function* (view) {
   const p11refs = Link(view, p11);
   const p111refs = Link(view, p111);
   const p1111refs = Link(view, p1111);
-  const p2refs = Link(view, p3);
-  const p22refs = Link(view, p33);
-  const p222refs = Link(view, p333);
+  const p2refs = Link(view, p2);
+  const p22refs = Link(view, p22);
+  const p222refs = Link(view, p222);
+  const pn21refs = Link(view, pn21);
+  const pn22refs = Link(view, pn22);
+  const pn23refs = Link(view, pn23);
 
   yield* p1refs.animate();
   yield* p11refs.animate();
@@ -203,5 +265,17 @@ export default makeScene2D(function* (view) {
   yield* mainBranch().text('main', 0.3);
   yield* featureBranch().text('New Feature', 0.3);
   yield* highLight().end(1, 0.5);
+
+  yield* pn21refs.animate();
+  yield* pn22refs.animate();
+  yield* pn23refs.animate();
+
+  yield* all(
+    p2refs.fade(0, 0.2),
+    p22refs.fade(0, 0.2),
+    p222refs.fade(0, 0.2),
+    highLight().opacity(0, 0.5),
+  );
+
   yield* waitFor(10);
 });

@@ -103,5 +103,14 @@ export default function (
       }
       if (lineLeft) yield* linkUp().end(1, 0.2);
     },
+    fade: function* (opacity: number, duration: number) {
+      if (lineUp) yield* linkUp().end(0, duration);
+      if (linesRight) {
+        for (const l of linkRight) {
+          yield* l.end(0, duration);
+        }
+      }
+      yield* all(circ().opacity(opacity, duration));
+    },
   };
 }
