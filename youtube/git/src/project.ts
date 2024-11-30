@@ -6,11 +6,11 @@ import './global.css';
 // import outro from './scenes/outro?scene';
 // import TestsTitle from './scenes/TestsTitle?scene';
 
-// import MultiBranch from './scenes/MultiBranch?scene';
+import MultiBranch from './scenes/MultiBranch?scene';
 import Rebase from './scenes/Rebase?scene';
 
 // audio
 
 export default makeProject({
-  scenes: [Rebase],
+  scenes: [MultiBranch, Rebase],
 });

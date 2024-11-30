@@ -1,8 +1,11 @@
-import {makeScene2D, Rect} from '@motion-canvas/2d';
-import {all} from '@motion-canvas/core';
+import {Line, makeScene2D, Rect, Txt} from '@motion-canvas/2d';
+import {all, createRef, waitFor} from '@motion-canvas/core';
 import Link, {LinkProps} from '../components/chain/Link';
 
 export default makeScene2D(function* (view) {
+  const mainBranch = createRef<Txt>();
+  const featureBranch = createRef<Txt>();
+  const highLight = createRef<Line>();
   view.add(<Rect fill={'#27262f'} width={view.width} height={view.height} />);
 
   const lineSize = 100;
@@ -12,11 +15,9 @@ export default makeScene2D(function* (view) {
   const borderWidth = 10;
   const radius = 40;
   const mainBranchColor = '#76389b';
-  const branch1Color = '#08a0bc';
   const branch2Color = '#36ba96';
-  const branch3Color = '#f7c744';
 
-  const p1pos: [number, number] = [-300, 600];
+  const p1pos: [number, number] = [-300, 850];
   const p1: LinkProps = {
     color: mainBranchColor,
     nodePosition: p1pos,
@@ -153,17 +154,54 @@ export default makeScene2D(function* (view) {
     nodePosition: p333pos,
   };
 
+  view.add(
+    <>
+      <Txt
+        fill={'white'}
+        fontSize={40}
+        position={[-400, 850]}
+        ref={mainBranch}
+      />
+      ,
+      <Txt
+        fill={'white'}
+        fontSize={50}
+        position={[200, -400]}
+        ref={featureBranch}
+      />
+      <Line
+        ref={highLight}
+        stroke={'#f00'}
+        lineWidth={10}
+        lineDash={[10, 10]}
+        radius={20}
+        end={0}
+        points={[
+          [p3pos[0] - 100, p3pos[1] + 100],
+          [p333pos[0] - 100, p333pos[1] - 100],
+          [p333pos[0] + 100, p333pos[1] - 100],
+          [p3pos[0] + 100, p3pos[1] + 100],
+          [p3pos[0] - 100, p3pos[1] + 100],
+        ]}
+      />
+    </>,
+  );
+
   const p1refs = Link(view, p1);
   const p11refs = Link(view, p11);
   const p111refs = Link(view, p111);
   const p1111refs = Link(view, p1111);
-  const p3refs = Link(view, p3);
-  const p33refs = Link(view, p33);
-  const p333refs = Link(view, p333);
+  const p2refs = Link(view, p3);
+  const p22refs = Link(view, p33);
+  const p222refs = Link(view, p333);
 
   yield* p1refs.animate();
   yield* p11refs.animate();
   yield* p111refs.animate();
-  yield* all(p3refs.animate(), p33refs.animate(), p333refs.animate());
+  yield* all(p2refs.animate(), p22refs.animate(), p222refs.animate());
   yield* p1111refs.animate();
+  yield* mainBranch().text('main', 0.3);
+  yield* featureBranch().text('New Feature', 0.3);
+  yield* highLight().end(1, 0.5);
+  yield* waitFor(10);
 });

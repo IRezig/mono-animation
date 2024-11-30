@@ -174,15 +174,6 @@ export default makeScene2D(function* (view) {
     circleSize,
     borderWidth,
     nodePosition: p333pos,
-    lineUp: {
-      lineWidth,
-      radius,
-      color: branch2Color,
-      points: [
-        [0, 0],
-        [0, -lineSize],
-      ],
-    },
     lineLeft: {
       lineWidth,
       radius,
