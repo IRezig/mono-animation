@@ -5,6 +5,8 @@ export const Colors = {
   surface: '#242424',
   surfaceLight: '#c0b3a3',
 
+  white: '#ffffff',
+
   KEYWORD: '#ff6470',
   TEXT: '#ACB3BF',
   FUNCTION: '#ffc66d',

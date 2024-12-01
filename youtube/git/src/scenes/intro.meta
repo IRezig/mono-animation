@@ -1,10 +1,5 @@
 {
   "version": 1,
-  "timeEvents": [
-    {
-      "name": "signal",
-      "targetTime": 1
-    }
-  ],
+  "timeEvents": [],
   "seed": 2591187991
 }

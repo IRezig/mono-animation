@@ -6,11 +6,15 @@ import './global.css';
 // import outro from './scenes/outro?scene';
 // import TestsTitle from './scenes/TestsTitle?scene';
 
+import Advantages from './scenes/Advantages';
+import intro from './scenes/intro?scene';
 import MultiBranch from './scenes/MultiBranch?scene';
 import Rebase from './scenes/Rebase?scene';
 
 // audio
+import git_rebase from './audio/git_rebase.mp3';
 
 export default makeProject({
-  scenes: [MultiBranch, Rebase],
+  scenes: [intro, MultiBranch, Rebase, Advantages],
+  audio: [git_rebase],
 });
