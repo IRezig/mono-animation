@@ -1,18 +1,18 @@
+import {parser} from '@lezer/javascript';
 import {
   Circle,
   Code,
-  makeScene2D,
+  LezerHighlighter,
   lines,
+  makeScene2D,
   Rect,
   Txt,
-  LezerHighlighter,
 } from '@motion-canvas/2d';
-import { createRef, all } from '@motion-canvas/core';
-import { Direction } from '@motion-canvas/core/lib/types';
-import { slideTransition } from '@motion-canvas/core/lib/transitions';
-import { waitFor, waitUntil } from '@motion-canvas/core/lib/flow';
-import { parser } from '@lezer/javascript';
-import { Style } from './Code';
+import {all, createRef} from '@motion-canvas/core';
+import {waitFor, waitUntil} from '@motion-canvas/core/lib/flow';
+import {slideTransition} from '@motion-canvas/core/lib/transitions';
+import {Direction} from '@motion-canvas/core/lib/types';
+import {Style} from './Code';
 
 const WIDTH = 700;
 const HEIGHT = 800;
@@ -45,11 +45,7 @@ export default makeScene2D(function* (view) {
   const titleLabel = createRef<Txt>();
   const descLabel = createRef<Txt>();
 
-  view.add(
-    <>
-      ‡<Rect layout fill={'#141414'} height={'100%'} width={'100%'} />
-    </>
-  );
+  view.add(<Rect layout fill={'#141414'} height={'100%'} width={'100%'} />);
 
   yield view.add(
     <Rect
@@ -202,7 +198,7 @@ export default makeScene2D(function* (view) {
           fontFamily={'Delius'}
         />
       </Rect>
-    </Rect>
+    </Rect>,
   );
 
   yield view.add(
@@ -253,7 +249,7 @@ export default NewFeature;
 `}
         />
       </Rect>
-    </>
+    </>,
   );
 
   yield* slideTransition(Direction.Bottom, 1);
@@ -287,7 +283,7 @@ export default NewFeature;
     PRCodeRect().x(50, 0.2),
     PRCodeText().text(`code here`, 0.2),
     PRBtnText().text('Create a new Pull Request', 0.2),
-    PRBtn().fill('blue', 0.2)
+    PRBtn().fill('blue', 0.2),
   );
   yield* waitFor(2);
 });

@@ -1,13 +1,7 @@
-import { HighlightStyle } from '@codemirror/language';
-import {
-  Code,
-  LezerHighlighter,
-  withDefaults,
-  CodeProps,
-} from '@motion-canvas/2d';
-import { map } from '@motion-canvas/core';
-import { tags } from '@lezer/highlight';
-import { parser as js } from '@lezer/javascript';
+import {HighlightStyle} from '@codemirror/language';
+import {tags} from '@lezer/highlight';
+import {CodeProps} from '@motion-canvas/2d';
+import {map} from '@motion-canvas/core';
 
 const KEYWORD = '#ff5d62';
 const TEXT = '#dbdbdb';

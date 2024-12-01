@@ -1,12 +1,6 @@
-import {
-  Circle,
-  Code,
-  Rect,
-  LezerHighlighter,
-  withDefaults,
-} from '@motion-canvas/2d';
-import { parser } from '@lezer/javascript';
-import { Style } from './Code';
+import {parser} from '@lezer/javascript';
+import {Circle, Code, LezerHighlighter, Rect} from '@motion-canvas/2d';
+import {Style} from '../components/Code';
 
 const WIDTH = 700;
 const HEIGHT = 800;
