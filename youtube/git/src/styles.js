@@ -17,8 +17,10 @@ export const Colors = {
   green: '#8bc34a',
   blue: '#2196f3',
 
+  shinyYellow: '#f7c744',
   mainBranch: '#76389b',
   featureBranch: '#36ba96',
+  bugfixBranch: '#08a0bc',
 };
 
 export const BaseFont = {

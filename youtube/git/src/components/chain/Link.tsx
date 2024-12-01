@@ -57,7 +57,7 @@ export default function (
           stroke={lineDown.color}
           radius={lineDown.radius}
           lineWidth={lineDown.lineWidth}
-          end={0}
+          opacity={0}
           points={lineDown.points.map(p => [
             p[0],
             p[1] + (circleSize / 2 + borderWidth / 2),
@@ -70,7 +70,7 @@ export default function (
   return {
     animate: function* (waitingTime = 0) {
       if (waitingTime) yield* waitFor(waitingTime);
-      if (lineDown) yield* linkDown().end(1, 0.2);
+      if (lineDown) yield* linkDown().opacity(1, 0.2);
       yield* all(circ().opacity(1, 0.2), circ().scale(1, 0.2));
       if (lineUp) yield* linkUp().end(1, 0.2);
     },
@@ -78,6 +78,11 @@ export default function (
       if (lineUp) yield* linkUp().end(0, duration);
       if (lineDown) yield* linkDown().end(0, duration);
       yield* all(circ().opacity(opacity, duration));
+    },
+    colorize: function* (color: string, duration: number) {
+      if (lineUp) yield* linkUp().stroke(color, duration);
+      if (lineDown) yield* linkDown().stroke(color, duration);
+      yield* circ().stroke(color, duration);
     },
   };
 }

@@ -52,18 +52,6 @@ export default makeScene2D(function* (view) {
         [0, -lineSize2],
       ],
     },
-    linesRight: [
-      {
-        radius,
-        color: Colors.featureBranch,
-        lineWidth,
-        points: [
-          [0, 0],
-          [lineSize2, 0],
-          [lineSize2, -lineSize],
-        ],
-      },
-    ],
   };
   const p111pos: [number, number] = [
     p11pos[0],
@@ -109,14 +97,14 @@ export default makeScene2D(function* (view) {
     p1111pos[1] - (lineSize2 + circleSize),
   ];
   const pn21: LinkProps = {
-    color: Colors.featureBranch,
+    color: Colors.shinyYellow,
     nodePosition: pn21pos,
     circleSize,
     borderWidth,
     lineUp: {
       lineWidth,
       radius,
-      color: Colors.featureBranch,
+      color: Colors.shinyYellow,
       points: [
         [0, 0],
         [0, -lineSize],
@@ -129,14 +117,14 @@ export default makeScene2D(function* (view) {
     pn21pos[1] - (lineSize + circleSize),
   ];
   const pn22: LinkProps = {
-    color: Colors.featureBranch,
+    color: Colors.shinyYellow,
     nodePosition: pn22pos,
     circleSize,
     borderWidth,
     lineUp: {
       lineWidth,
       radius,
-      color: Colors.featureBranch,
+      color: Colors.shinyYellow,
       points: [
         [0, 0],
         [0, -lineSize],
@@ -148,14 +136,14 @@ export default makeScene2D(function* (view) {
     pn22pos[1] - (lineSize + circleSize),
   ];
   const pn23: LinkProps = {
-    color: Colors.featureBranch,
+    color: Colors.shinyYellow,
     nodePosition: pn23pos,
     circleSize,
     borderWidth,
     lineUp: {
       lineWidth,
       radius,
-      color: Colors.featureBranch,
+      color: Colors.shinyYellow,
       points: [
         [0, 0],
         [0, -lineSize],
@@ -179,6 +167,16 @@ export default makeScene2D(function* (view) {
       points: [
         [0, 0],
         [0, -lineSize2],
+      ],
+    },
+    lineDown: {
+      lineWidth,
+      radius,
+      color: Colors.featureBranch,
+      points: [
+        [0, 0],
+        [0, lineSize2 / 2],
+        [-lineSize2, lineSize2 / 2],
       ],
     },
   };
@@ -261,7 +259,9 @@ export default makeScene2D(function* (view) {
   yield* p1refs.animate();
   yield* p11refs.animate();
   yield* p111refs.animate();
-  yield* all(p2refs.animate(), p22refs.animate(), p222refs.animate());
+  yield* p2refs.animate();
+  yield* p22refs.animate();
+  yield* p222refs.animate();
   yield* p1111refs.animate();
   yield* mainBranch().text('main', 0.3);
   yield* featureBranch().text('New Feature', 0.3);
@@ -277,7 +277,11 @@ export default makeScene2D(function* (view) {
     p22refs.fade(0, 0.2),
     p222refs.fade(0, 0.2),
     highLight().opacity(0, 0.5),
+
+    pn21refs.colorize(Colors.mainBranch, 0.5),
+    pn22refs.colorize(Colors.mainBranch, 0.5),
+    pn23refs.colorize(Colors.mainBranch, 0.5),
   );
 
-  yield* waitFor(5);
+  yield* waitFor(2);
 });

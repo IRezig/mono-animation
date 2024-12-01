@@ -1,32 +1,37 @@
 import {makeScene2D, Rect} from '@motion-canvas/2d';
-import {all, waitFor} from '@motion-canvas/core';
+import {waitFor} from '@motion-canvas/core';
+import Buble, {BubleProps} from '../components/chain/Buble';
 import Link, {LinkProps} from '../components/chain/Link';
+import {Colors} from '../styles';
 
 export default makeScene2D(function* (view) {
-  view.add(<Rect fill={'#27262f'} width={view.width} height={view.height} />);
+  view.add(
+    <Rect fill={Colors.background} width={view.width} height={view.height} />,
+  );
 
   const lineSize = 100;
   const lineSize2 = 200;
   const lineSize3 = 300;
+  const bubleSize = 50;
   const circleSize = 60;
   const lineWidth = 8;
   const borderWidth = 8;
   const radius = 40;
-  const mainBranchColor = '#76389b';
-  const branch1Color = '#08a0bc';
-  const branch2Color = '#36ba96';
-  const branch3Color = '#f7c744';
+  const mainBY = -300;
+  const branch1Y = -166;
+  const branch2Y = -66;
+  const branch3Y = 36;
 
-  const p1pos: [number, number] = [-300, 600];
+  const p1pos: [number, number] = [mainBY, 600];
   const p1: LinkProps = {
-    color: mainBranchColor,
+    color: Colors.mainBranch,
     nodePosition: p1pos,
     circleSize,
     borderWidth,
     lineUp: {
       lineWidth,
       radius,
-      color: mainBranchColor,
+      color: Colors.mainBranch,
       points: [
         [0, 0],
         [0, -lineSize],
@@ -35,26 +40,23 @@ export default makeScene2D(function* (view) {
     lineDown: {
       lineWidth,
       radius,
-      color: mainBranchColor,
+      color: Colors.mainBranch,
       points: [
         [0, 0],
         [0, lineSize / 2],
       ],
     },
   };
-  const p11pos: [number, number] = [
-    p1pos[0],
-    p1pos[1] - (lineSize + circleSize),
-  ];
+  const p11pos: [number, number] = [mainBY, p1pos[1] - (lineSize + circleSize)];
   const p11: LinkProps = {
-    color: mainBranchColor,
+    color: Colors.mainBranch,
     nodePosition: p11pos,
     circleSize,
     borderWidth,
     lineUp: {
       lineWidth,
       radius,
-      color: mainBranchColor,
+      color: Colors.mainBranch,
       points: [
         [0, 0],
         [0, -lineSize],
@@ -62,18 +64,18 @@ export default makeScene2D(function* (view) {
     },
   };
   const p111pos: [number, number] = [
-    p11pos[0],
+    mainBY,
     p11pos[1] - (lineSize + circleSize),
   ];
   const p111: LinkProps = {
-    color: mainBranchColor,
+    color: Colors.mainBranch,
     nodePosition: p111pos,
     circleSize,
     borderWidth,
     lineUp: {
       lineWidth,
       radius,
-      color: mainBranchColor,
+      color: Colors.mainBranch,
       points: [
         [0, 0],
         [0, -lineSize - 50],
@@ -81,18 +83,18 @@ export default makeScene2D(function* (view) {
     },
   };
   const p1111pos: [number, number] = [
-    p111pos[0],
+    mainBY,
     p111pos[1] - (lineSize + 50 + circleSize),
   ];
   const p1111: LinkProps = {
-    color: mainBranchColor,
+    color: Colors.mainBranch,
     nodePosition: p1111pos,
     circleSize,
     borderWidth,
     lineUp: {
       lineWidth,
       radius,
-      color: mainBranchColor,
+      color: Colors.mainBranch,
       points: [
         [0, 0],
         [0, -lineSize2 * 3],
@@ -101,18 +103,18 @@ export default makeScene2D(function* (view) {
   };
 
   const p3pos: [number, number] = [
-    p11pos[0] + (lineSize + circleSize / 2 + lineWidth / 2),
+    branch1Y,
     p11pos[1] - (lineSize / 2 + circleSize / 2),
   ];
   const p3: LinkProps = {
-    color: branch2Color,
+    color: Colors.featureBranch,
     circleSize,
     borderWidth,
     nodePosition: p3pos,
     lineUp: {
       lineWidth,
       radius,
-      color: branch2Color,
+      color: Colors.featureBranch,
       points: [
         [0, 0],
         [0, -lineSize],
@@ -121,7 +123,7 @@ export default makeScene2D(function* (view) {
     lineDown: {
       lineWidth,
       radius,
-      color: branch2Color,
+      color: Colors.featureBranch,
       points: [
         [0, 0],
         [0, lineSize / 2],
@@ -131,18 +133,18 @@ export default makeScene2D(function* (view) {
   };
 
   const p33pos: [number, number] = [
-    p3pos[0],
+    branch1Y,
     p3pos[1] - (lineSize + circleSize),
   ];
   const p33: LinkProps = {
-    color: branch2Color,
+    color: Colors.featureBranch,
     circleSize,
     borderWidth,
     nodePosition: p33pos,
     lineUp: {
       lineWidth,
       radius,
-      color: branch2Color,
+      color: Colors.featureBranch,
       points: [
         [0, 0],
         [0, -lineSize2],
@@ -151,29 +153,39 @@ export default makeScene2D(function* (view) {
   };
 
   const p333pos: [number, number] = [
-    p33pos[0],
+    branch1Y,
     p33pos[1] - (lineSize2 + circleSize),
   ];
   const p333: LinkProps = {
-    color: branch2Color,
+    color: Colors.featureBranch,
     circleSize,
     borderWidth,
     nodePosition: p333pos,
+    lineUp: {
+      lineWidth,
+      radius,
+      color: Colors.featureBranch,
+      points: [
+        [0, 0],
+        [0, -lineSize2],
+        [-lineSize - 10, -lineSize2],
+      ],
+    },
   };
 
   const p4pos: [number, number] = [
-    p11pos[0] + (lineSize2 + circleSize / 2 + lineWidth / 2),
-    p11pos[1] - (lineSize2 + circleSize / 2),
+    branch2Y,
+    p11pos[1] - (lineSize2 + 10 + circleSize / 2),
   ];
   const p4: LinkProps = {
-    color: branch1Color,
+    color: Colors.bugfixBranch,
     circleSize,
     borderWidth,
     nodePosition: p4pos,
     lineUp: {
       lineWidth,
       radius,
-      color: branch1Color,
+      color: Colors.bugfixBranch,
       points: [
         [0, 0],
         [0, -lineSize3],
@@ -182,7 +194,7 @@ export default makeScene2D(function* (view) {
     lineDown: {
       lineWidth,
       radius,
-      color: branch1Color,
+      color: Colors.bugfixBranch,
       points: [
         [0, 0],
         [0, lineSize / 2],
@@ -191,39 +203,39 @@ export default makeScene2D(function* (view) {
     },
   };
   const p44pos: [number, number] = [
-    p4pos[0],
-    p4pos[1] - (lineSize3 + circleSize),
+    branch2Y,
+    p4pos[1] - (lineSize3 + 30 + circleSize / 2),
   ];
   const p44: LinkProps = {
-    color: branch1Color,
+    color: Colors.bugfixBranch,
     circleSize,
     borderWidth,
     nodePosition: p44pos,
-    lineDown: {
+    lineUp: {
       lineWidth,
       radius,
-      color: branch1Color,
+      color: Colors.bugfixBranch,
       points: [
         [0, 0],
         [0, -lineSize2 - 50],
-        [-lineSize2, -lineSize2 - 50],
+        [-lineSize2 - 10, -lineSize2 - 50],
       ],
     },
   };
 
   const p2pos: [number, number] = [
-    p11pos[0] + (lineSize3 + circleSize / 2 + lineWidth / 2),
+    branch3Y,
     p11pos[1] - (lineSize2 * 2 + circleSize + 40),
   ];
   const p2: LinkProps = {
-    color: branch3Color,
+    color: Colors.shinyYellow,
     circleSize,
     borderWidth,
     nodePosition: p2pos,
     lineUp: {
       lineWidth,
       radius,
-      color: branch3Color,
+      color: Colors.shinyYellow,
       points: [
         [0, 0],
         [0, -lineSize3],
@@ -232,7 +244,7 @@ export default makeScene2D(function* (view) {
     lineDown: {
       lineWidth,
       radius,
-      color: branch3Color,
+      color: Colors.shinyYellow,
       points: [
         [0, 0],
         [0, lineSize2 / 2],
@@ -241,24 +253,43 @@ export default makeScene2D(function* (view) {
     },
   };
   const p22pos: [number, number] = [
-    p2pos[0],
+    branch3Y,
     p2pos[1] - (lineSize3 + circleSize),
   ];
   const p22: LinkProps = {
-    color: branch3Color,
+    color: Colors.shinyYellow,
     circleSize,
     borderWidth,
     nodePosition: p22pos,
     lineUp: {
       lineWidth,
       radius,
-      color: branch3Color,
+      color: Colors.shinyYellow,
       points: [
         [0, 0],
         [0, -lineSize],
-        [-lineSize3, -lineSize],
+        [-lineSize3 - 12, -lineSize],
       ],
     },
+  };
+
+  const b3pos: [number, number] = [mainBY, -290];
+  const b3: BubleProps = {
+    color: Colors.featureBranch,
+    nodePosition: b3pos,
+    bubleSize,
+  };
+  const b4pos: [number, number] = [mainBY, -440];
+  const b4: BubleProps = {
+    color: Colors.bugfixBranch,
+    nodePosition: b4pos,
+    bubleSize,
+  };
+  const b2pos: [number, number] = [mainBY, -555];
+  const b2: BubleProps = {
+    color: Colors.shinyYellow,
+    nodePosition: b2pos,
+    bubleSize,
   };
 
   const p1refs = Link(view, p1);
@@ -272,15 +303,24 @@ export default makeScene2D(function* (view) {
   const p333refs = Link(view, p333);
   const p4refs = Link(view, p4);
   const p44refs = Link(view, p44);
+  const b3ref = Buble(view, b3);
+  const b4ref = Buble(view, b4);
+  const b2ref = Buble(view, b2);
 
   yield* p1refs.animate();
   yield* p11refs.animate();
-  yield* all(p3refs.animate(), p4refs.animate());
+  yield* p3refs.animate();
   yield* p111refs.animate();
-  yield* all(p33refs.animate());
+  yield* p4refs.animate();
+  yield* p33refs.animate();
   yield* p1111refs.animate();
   yield* p2refs.animate();
-  yield* all(p22refs.animate(), p333refs.animate(), p44refs.animate());
+  yield* p333refs.animate();
+  yield* b3ref.animate();
+  yield* p44refs.animate();
+  yield* b4ref.animate();
+  yield* p22refs.animate();
+  yield* b2ref.animate();
 
-  yield* waitFor(10);
+  yield* waitFor(2);
 });
