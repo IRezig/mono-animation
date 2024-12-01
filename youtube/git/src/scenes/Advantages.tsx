@@ -99,8 +99,11 @@ export default makeScene2D(function* (view) {
     img2().opacity(1, 1),
   );
   yield* all(t3().text('Enhanced Debugging', 1), img3().opacity(1, 1));
-  yield* waitFor(2);
+  // yield* waitFor(2);
   yield* all(t4().text('Resolve Conflicts', 1), img4().opacity(1, 1));
+  yield* img4().scale(1.5, 1);
+  yield* img4().scale(0.5, 1);
+  yield* img4().scale(1, 1);
 
-  yield* waitFor(6);
+  yield* waitFor(3);
 });

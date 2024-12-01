@@ -1,12 +1,28 @@
-import {makeScene2D, Rect} from '@motion-canvas/2d';
-import {waitFor} from '@motion-canvas/core';
+import {makeScene2D, Rect, Txt} from '@motion-canvas/2d';
+import {createRef, waitFor} from '@motion-canvas/core';
 import Buble, {BubleProps} from '../components/chain/Buble';
 import Link, {LinkProps} from '../components/chain/Link';
 import {Colors} from '../styles';
 
 export default makeScene2D(function* (view) {
+  const title = createRef<Txt>();
   view.add(
-    <Rect fill={Colors.background} width={view.width} height={view.height} />,
+    <>
+      <Rect fill={Colors.background} width={view.width} height={view.height} />,
+      <Txt
+        ref={title}
+        strokeFirst
+        fontSize={62}
+        lineJoin={'round'}
+        fontFamily={'JetBrains Mono'}
+        lineWidth={8}
+        x={250}
+        y={600}
+        stroke={Colors.PROPERTY}
+        fill={Colors.white}
+      />
+      ,
+    </>,
   );
 
   const lineSize = 100;
@@ -307,6 +323,7 @@ export default makeScene2D(function* (view) {
   const b4ref = Buble(view, b4);
   const b2ref = Buble(view, b2);
 
+  yield* title().text('Git Rebase', 1);
   yield* p1refs.animate();
   yield* p11refs.animate();
   yield* p3refs.animate();

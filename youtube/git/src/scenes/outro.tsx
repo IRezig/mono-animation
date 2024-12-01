@@ -282,6 +282,12 @@ export default makeScene2D(function* (view) {
     pn22refs.colorize(Colors.mainBranch, 0.5),
     pn23refs.colorize(Colors.mainBranch, 0.5),
   );
+  yield* all(
+    featureBranch().x(-100, 0.2),
+    featureBranch().y(-800, 0.2),
+    featureBranch().opacity(1, 0.2),
+    waitFor(2),
+  );
 
   yield* waitFor(2);
 });
