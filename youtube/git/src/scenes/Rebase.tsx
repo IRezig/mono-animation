@@ -1,11 +1,12 @@
 import {Line, makeScene2D, Rect, Txt} from '@motion-canvas/2d';
 import {all, createRef, waitFor} from '@motion-canvas/core';
+import Card, {CardProps} from '../components/Card';
 import Link, {LinkProps} from '../components/chain/Link';
 import {Colors} from '../styles';
 
 export default makeScene2D(function* (view) {
   const mainBranch = createRef<Txt>();
-  const featureBranch = createRef<Txt>();
+  const featureBranchTitle = createRef<Txt>();
   const highLight = createRef<Line>();
 
   const lineSize = 100;
@@ -212,20 +213,56 @@ export default makeScene2D(function* (view) {
     nodePosition: p222pos,
   };
 
+  const c1: CardProps = {
+    title: 'aff55',
+    color: '#61d8b3',
+    position: [p2pos[0] + 200, p2pos[1]],
+  };
+
+  const c2: CardProps = {
+    title: '3fbd2',
+    color: '#61d8b3',
+    position: [p2pos[0] + 200, p22pos[1]],
+  };
+
+  const c3: CardProps = {
+    title: 'a1b2c',
+    color: '#61d8b3',
+    position: [p2pos[0] + 200, p222pos[1]],
+  };
+
+  const c21: CardProps = {
+    title: 'b1b2c',
+    color: '#DFCCFB',
+    position: [p2pos[0] - 50, pn21pos[1]],
+  };
+
+  const c22: CardProps = {
+    title: 'c1b2c',
+    color: '#DFCCFB',
+    position: [p2pos[0] - 50, pn22pos[1]],
+  };
+
+  const c23: CardProps = {
+    title: 'e1b2c',
+    color: '#DFCCFB',
+    position: [p2pos[0] - 50, pn23pos[1]],
+  };
+
   view.add(
     <>
       <Txt
-        fill={'white'}
+        fill={Colors.white}
         fontSize={40}
         position={[-400, 850]}
         ref={mainBranch}
       />
       ,
       <Txt
-        fill={'white'}
+        fill={Colors.white}
         fontSize={50}
-        position={[200, -150]}
-        ref={featureBranch}
+        position={[180, -220]}
+        ref={featureBranchTitle}
       />
       <Line
         ref={highLight}
@@ -235,11 +272,11 @@ export default makeScene2D(function* (view) {
         radius={20}
         end={0}
         points={[
-          [p2pos[0] - 100, p2pos[1] + 100],
-          [p222pos[0] - 100, p222pos[1] - 100],
-          [p222pos[0] + 100, p222pos[1] - 100],
-          [p2pos[0] + 100, p2pos[1] + 100],
-          [p2pos[0] - 100, p2pos[1] + 100],
+          [p2pos[0] - 80, p2pos[1] + 100],
+          [p222pos[0] - 80, p222pos[1] - 80],
+          [p222pos[0] + 80, p222pos[1] - 80],
+          [p2pos[0] + 80, p2pos[1] + 100],
+          [p2pos[0] - 80, p2pos[1] + 100],
         ]}
       />
     </>,
@@ -255,16 +292,28 @@ export default makeScene2D(function* (view) {
   const pn21refs = Link(view, pn21);
   const pn22refs = Link(view, pn22);
   const pn23refs = Link(view, pn23);
+  const cardRef = Card(view, c1);
+  const cardRef2 = Card(view, c2);
+  const cardRef3 = Card(view, c3);
+  const cardRef21 = Card(view, c21);
+  const cardRef22 = Card(view, c22);
+  const cardRef23 = Card(view, c23);
 
   yield* p1refs.animate();
   yield* p11refs.animate();
   yield* p111refs.animate();
   yield* p2refs.animate();
+  yield* cardRef.animate();
   yield* p22refs.animate();
+  yield* cardRef2.animate();
   yield* p222refs.animate();
+  yield* cardRef3.animate();
   yield* p1111refs.animate();
-  yield* mainBranch().text('main', 0.3);
-  yield* featureBranch().text('New Feature', 0.3);
+
+  yield* all(
+    mainBranch().text('main', 0.2),
+    featureBranchTitle().text('New Feature', 0.2),
+  );
   yield* highLight().end(1, 0.5);
 
   yield* pn21refs.animate();
@@ -272,23 +321,28 @@ export default makeScene2D(function* (view) {
   yield* pn23refs.animate();
 
   yield* all(
-    featureBranch().opacity(0, 0.2),
+    featureBranchTitle().opacity(0, 0.2),
     p2refs.fade(0, 0.2),
     p22refs.fade(0, 0.2),
     p222refs.fade(0, 0.2),
+    cardRef.fade(),
+    cardRef2.fade(),
+    cardRef3.fade(),
     highLight().opacity(0, 0.5),
 
-    pn21refs.colorize(Colors.mainBranch, 0.5),
-    pn22refs.colorize(Colors.mainBranch, 0.5),
-    pn23refs.colorize(Colors.mainBranch, 0.5),
+    pn21refs.colorize(Colors.mainBranch, 0.2),
+    cardRef21.animate(),
+    pn22refs.colorize(Colors.mainBranch, 0.2),
+    cardRef22.animate(),
+    pn23refs.colorize(Colors.mainBranch, 0.2),
+    cardRef23.animate(),
   );
 
   yield* all(
-    featureBranch().x(-100, 0.2),
-    featureBranch().y(-800, 0.2),
-    featureBranch().opacity(1, 0.2),
-    waitFor(2),
+    featureBranchTitle().x(-100, 0.2),
+    featureBranchTitle().y(-200, 0.2),
+    featureBranchTitle().opacity(1, 0.2),
   );
 
-  yield* waitFor(2);
+  yield* waitFor(1);
 });

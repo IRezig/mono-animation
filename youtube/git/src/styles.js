@@ -18,6 +18,7 @@ export const Colors = {
   red: '#ef5350',
   green: '#8bc34a',
   blue: '#2196f3',
+  blueSky: '#c5e1eb',
 
   shinyYellow: '#f7c744',
   mainBranch: '#76389b',
