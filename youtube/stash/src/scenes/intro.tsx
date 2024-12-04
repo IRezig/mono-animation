@@ -26,5 +26,5 @@ export default makeScene2D(function* (view) {
   );
 
   yield* title().text('Git Stash', 1);
-  yield* waitFor(2);
+  yield* waitFor(1);
 });

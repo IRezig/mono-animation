@@ -25,6 +25,6 @@ export default makeScene2D(function* (view) {
     />,
   );
 
-  yield* title().text('How Git Rebase Works', 1);
+  yield* title().text('Some Basic Commands', 1);
   yield* waitFor(1);
 });

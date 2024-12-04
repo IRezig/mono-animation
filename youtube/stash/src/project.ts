@@ -13,6 +13,6 @@ import Works from './scenes/Works?scene';
 import audio from './audio/stash.mp3';
 
 export default makeProject({
-  scenes: [intro, MultiBranch, Rebase, Advantages, chapter2, Works, outro],
+  scenes: [intro, MultiBranch, chapter2, Rebase, Advantages, Works, outro],
   audio,
 });
