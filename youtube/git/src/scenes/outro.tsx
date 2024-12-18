@@ -358,5 +358,5 @@ export default makeScene2D(function* (view) {
   yield* subs().opacity(1, 0.5);
   yield* subs().scale(1.2, 0.5);
 
-  yield* waitFor(2);
+  yield* waitFor(200);
 });

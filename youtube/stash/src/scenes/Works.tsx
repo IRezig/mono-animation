@@ -78,16 +78,19 @@ export default makeScene2D(function* (view) {
 
 
 
-            git checkout new-feature
+            git stash
             
 
-            git rebase main
+            git stash list
 
 
-            git add .
+            git stash apply
 
 
-            git rebase --continue
+            git stash stash@{1}
+
+
+            git stash clear
         `}
       />
     </Rect>,
@@ -95,9 +98,10 @@ export default makeScene2D(function* (view) {
 
   yield* slideTransition(Direction.Bottom, 1);
   yield* waitUntil('signal');
-  yield* code().selection(lines(6), 0.4);
+  yield* code().selection(lines(6), 3);
   yield* code().selection(lines(9), 8);
-  yield* code().selection(lines(12), 1);
+  yield* code().selection(lines(12), 5);
   yield* code().selection(lines(15), 4);
+  yield* code().selection(lines(18), 4);
   yield* waitFor(4);
 });

@@ -13,24 +13,24 @@ export default function (view: View2D, {nodePosition}: StashProps) {
       <Rect width={400} height={200} fill={'#e6f7f4'} radius={20}>
         <Txt
           fontSize={24}
-          fill={Colors.bugfixBranch}
+          fill={Colors.surface}
           x={-110}
           y={-30}
-          text={'index.js'}
+          text={'📃 index.js'}
         />
         <Txt
           fontSize={24}
-          fill={Colors.bugfixBranch}
+          fill={Colors.surface}
           x={-80}
           y={10}
-          text={'package.json'}
+          text={'📃 package.json'}
         />
         <Txt
           fontSize={24}
-          fill={Colors.bugfixBranch}
+          fill={Colors.surface}
           x={-80}
           y={60}
-          text={'README.md'}
+          text={'📃 README.md'}
         />
       </Rect>
       <Rect y={-90} width={400} height={40} fill={'#6cd2c4'} radius={20}>
