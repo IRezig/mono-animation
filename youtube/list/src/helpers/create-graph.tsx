@@ -1,6 +1,6 @@
 import {View2D} from '@motion-canvas/2d';
-import Candle from '../scenes/Chart';
-import Wave from '../scenes/Indicator';
+import Candle from '../components/Candle';
+import Wave from '../components/Wave';
 
 export const createCandle = (
   view: View2D,
