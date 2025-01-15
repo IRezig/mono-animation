@@ -22,8 +22,8 @@ const Wave = (
       position={position}
       scale={0.5}
       start={0}
-      opacity={1}
-      end={1}
+      opacity={0}
+      end={0}
       fill={isFilled ? fillColor : undefined}
     />,
   );

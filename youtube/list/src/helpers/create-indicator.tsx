@@ -1,13 +1,21 @@
-import {Line, View2D} from '@motion-canvas/2d';
+import {View2D} from '@motion-canvas/2d';
 import {createLine} from '../components/Line';
 import {createWave} from '../components/Wave';
 import {Colors} from '../styles';
 
 export const createIndicator = (view: View2D) => {
   const line = createLine(view, [
-    [200, 160],
+    [-400, 160],
     [100, 50],
   ]);
+  const baseline = createLine(
+    view,
+    [
+      [-400, 200],
+      [400, 200],
+    ],
+    [3, 3],
+  );
 
   const mw1 = createWave(
     view,
@@ -26,18 +34,6 @@ export const createIndicator = (view: View2D) => {
     [200, -20],
     Colors.grey,
     'M 70 440 C 70 440 123.125 1000 240 1000 C 356.875 1000 410 440 410 440',
-  );
-
-  view.add(
-    <Line
-      points={[
-        [-400, 200],
-        [400, 200],
-      ]}
-      stroke={Colors.white}
-      lineWidth={2}
-      lineDash={[3, 3]}
-    />,
   );
 
   const mfGreen1 = createWave(
@@ -65,5 +61,10 @@ export const createIndicator = (view: View2D) => {
     'M304.8,360a21.8,21.8,0,0,1,-40,0l-56,-110.6h0L180,314.6a20,20,0,0,1,-36,0L60,132.6H420Z',
   );
 
-  return {mfGreen1, mfGreen2, mfRed1, mfRed2, mw1, mw2, mw3, line};
+  function* animate() {
+    yield* line.fadeIn(1, 0.2);
+    yield* baseline.fadeIn(1, 0.2);
+  }
+
+  return {mfGreen1, mfGreen2, mfRed1, mfRed2, mw1, mw2, mw3, line, animate};
 };

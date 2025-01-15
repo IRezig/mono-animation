@@ -1,5 +1,5 @@
 import {makeScene2D, Rect, Txt, View2D} from '@motion-canvas/2d';
-import {createRef, waitFor} from '@motion-canvas/core';
+import {all, createRef, waitFor} from '@motion-canvas/core';
 import {createChartScene} from '../helpers/create-graph';
 import {createIndicator} from '../helpers/create-indicator';
 import {Colors} from '../styles';
@@ -43,26 +43,21 @@ export default makeScene2D(function* (view) {
   const title = addTitle(view);
   yield* title().text('Crypto', 1);
 
-  // Create waves and flags
+  // Create indicator
   const indicator = createIndicator(view);
   const candleGraph = createChartScene(view);
+  yield* indicator.animate();
+
   yield* waitFor(2);
-  yield* indicator.line.fadeIn(1, 0.2);
 
-  return null;
   // Animations
-  // yield* all(...candleGraph.map(c => c.animate()));
-  // yield* all(
-  //   waves.mw2.fadeIn(1, 0.2),
-  //   waves.mw3.fadeIn(1, 0.2),
-  // );
+  yield* all(...candleGraph.map(c => c.animate()));
+  yield* all(indicator.mw2.fadeIn(1, 0.2), indicator.mw3.fadeIn(1, 0.2));
 
-  // yield* all(
-  //   flags.mfGreen2.fadeIn(1, 0.2),
-  //   flags.mfRed1.fadeIn(1, 0.2),
-  //   flags.mfRed2.fadeIn(1, 0.2),
-  // );
-
-  // yield* waves.line().opacity(1, 1);
-  // yield* waitFor(2);
+  yield* all(
+    indicator.mfGreen2.fadeIn(1, 0.2),
+    indicator.mfRed1.fadeIn(1, 0.2),
+    indicator.mfRed2.fadeIn(1, 0.2),
+  );
+  yield* waitFor(2);
 });

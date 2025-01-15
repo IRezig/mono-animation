@@ -8,11 +8,12 @@ export interface LineProps {
   lineWidth?: number;
   radius?: number;
   opacity?: number;
+  lineDash?: number[];
 }
 
 const Line = (
   view: View2D,
-  {points, stroke, lineWidth = 4, radius = 0, opacity = 0}: LineProps,
+  {points, stroke, lineWidth = 4, radius = 0, opacity = 0, lineDash}: LineProps,
 ) => {
   const line = createRef<MotionLine>();
 
@@ -24,6 +25,7 @@ const Line = (
       lineWidth={lineWidth}
       radius={radius}
       opacity={opacity}
+      lineDash={lineDash}
     />,
   );
 
@@ -38,10 +40,15 @@ const Line = (
   };
 };
 
-export const createLine = (view: View2D, points: [number, number][]) => {
+export const createLine = (
+  view: View2D,
+  points: [number, number][],
+  lineDash?: number[],
+) => {
   return Line(view, {
     points,
     stroke: Colors.green,
-    opacity: 1,
+    opacity: 0,
+    lineDash,
   });
 };

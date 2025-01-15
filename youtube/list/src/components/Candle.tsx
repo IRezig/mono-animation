@@ -35,11 +35,13 @@ const Candle = (
           [x, y - low],
         ]}
         stroke={candleColor}
+        opacity={0}
         lineWidth={2}
       />
       <Rect
         ref={candleBody}
         fill={candleColor}
+        opacity={0}
         width={width}
         height={bodyHeight}
         x={x}
@@ -49,7 +51,7 @@ const Candle = (
   );
 
   return {
-    animate: function* (waitingTime = 0) {
+    animate: function* () {
       yield* wickLine().opacity(1, 0.3);
       yield* candleBody().opacity(1, 0.3);
     },
