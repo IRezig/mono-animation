@@ -8,11 +8,6 @@ export interface BubleProps {
   nodePosition: [number, number];
 }
 
-export interface BubleProps {
-  color: string;
-  bubleSize: number;
-  nodePosition: [number, number];
-}
 export default function (
   view: View2D,
   {color, bubleSize, nodePosition}: BubleProps,

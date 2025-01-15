@@ -11,6 +11,7 @@
     "motion-canvas": "npm run serve -w youtube/motion-canvas",
     "pull-request": "npm run serve -w youtube/pull-request",
     "git": "npm run serve -w youtube/git",
+    "list": "npm run serve -w youtube/list",
     "stash": "npm run serve -w youtube/stash",
     "logo": "npm run serve -w youtube/logo",
     "lint": "eslint \"youtube/**/src/**/*.ts?(x)\"",
