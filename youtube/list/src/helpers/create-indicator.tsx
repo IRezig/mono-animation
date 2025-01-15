@@ -6,18 +6,20 @@ import {Colors} from '../styles';
 
 export const createIndicator = (view: View2D) => {
   // Create lines
-  const line = createLine(view, [
-    [-400, 160],
-    [100, 50],
+  const lines = createGroup(view, [
+    createLine(view, [
+      [-400, 160],
+      [100, 50],
+    ]).component,
+    createLine(
+      view,
+      [
+        [-400, 200],
+        [400, 200],
+      ],
+      [3, 3],
+    ).component,
   ]);
-  const baseline = createLine(
-    view,
-    [
-      [-400, 200],
-      [400, 200],
-    ],
-    [3, 3],
-  );
 
   // Create waves group
   const waves = createGroup(view, [
@@ -41,8 +43,8 @@ export const createIndicator = (view: View2D) => {
     ).component,
   ]);
 
-  // Create flags group
-  const flags = createGroup(view, [
+  // Create moneyFlow group
+  const moneyFlow = createGroup(view, [
     createWave(
       view,
       [0, -160],
@@ -70,17 +72,15 @@ export const createIndicator = (view: View2D) => {
   ]);
 
   function* animate() {
-    yield* line.fadeIn(1, 0.2);
-    yield* baseline.fadeIn(1, 0.2);
+    yield* lines.fadeIn(1, 0.2);
     yield* waves.fadeIn(1, 0.2);
-    yield* flags.fadeIn(1, 0.2);
+    yield* moneyFlow.fadeIn(1, 0.2);
   }
 
   return {
-    line,
-    baseline,
+    lines,
     waves,
-    flags,
+    moneyFlow,
     animate,
   };
 };

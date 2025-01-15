@@ -26,7 +26,7 @@ const Candle = (
   const bodyHeight = Math.abs(close - entry);
   const bodyY = y - (close + entry) / 2;
 
-  view.add(
+  const component = (
     <>
       <Line
         ref={wickLine}
@@ -35,22 +35,23 @@ const Candle = (
           [x, y - low],
         ]}
         stroke={candleColor}
-        opacity={0}
+        opacity={1}
         lineWidth={2}
       />
       <Rect
         ref={candleBody}
         fill={candleColor}
-        opacity={0}
+        opacity={1}
         width={width}
         height={bodyHeight}
         x={x}
         y={bodyY}
       />
-    </>,
+    </>
   );
 
   return {
+    component,
     animate: function* () {
       yield* wickLine().opacity(1, 0.3);
       yield* candleBody().opacity(1, 0.3);

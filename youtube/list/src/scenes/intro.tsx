@@ -1,5 +1,5 @@
 import {makeScene2D, Rect, Txt, View2D} from '@motion-canvas/2d';
-import {all, createRef, waitFor} from '@motion-canvas/core';
+import {createRef, waitFor} from '@motion-canvas/core';
 import {createChartScene} from '../helpers/create-graph';
 import {createIndicator} from '../helpers/create-indicator';
 import {Colors} from '../styles';
@@ -51,7 +51,7 @@ export default makeScene2D(function* (view) {
   yield* waitFor(2);
 
   // Animations
-  yield* all(...candleGraph.map(c => c.animate()));
+  yield* candleGraph.fadeIn();
 
   yield* waitFor(2);
 });

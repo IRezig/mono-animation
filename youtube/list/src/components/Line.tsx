@@ -17,7 +17,7 @@ const Line = (
 ) => {
   const line = createRef<MotionLine>();
 
-  view.add(
+  const component = (
     <MotionLine
       ref={line}
       points={points}
@@ -26,10 +26,11 @@ const Line = (
       radius={radius}
       opacity={opacity}
       lineDash={lineDash}
-    />,
+    />
   );
 
   return {
+    component,
     line,
     fadeIn: function* (targetOpacity = 1, duration = 1) {
       yield* line().opacity(targetOpacity, duration);
@@ -48,7 +49,7 @@ export const createLine = (
   return Line(view, {
     points,
     stroke: Colors.green,
-    opacity: 0,
+    opacity: 1,
     lineDash,
   });
 };

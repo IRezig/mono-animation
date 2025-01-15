@@ -1,5 +1,6 @@
 import {View2D} from '@motion-canvas/2d';
 import {createCandle} from '../components/Candle';
+import {createGroup} from '../components/Group';
 
 export const createCandleGraph = (
   view: View2D,
@@ -12,7 +13,7 @@ export const createCandleGraph = (
 ) => {
   let previousClose = basePrice;
 
-  return movements.map((isUp, index) => {
+  const candles = movements.map((isUp, index) => {
     const candle = createCandle(
       view,
       startX + index * spacing,
@@ -25,6 +26,10 @@ export const createCandleGraph = (
     previousClose = candle.close;
     return candle;
   });
+  return createGroup(
+    view,
+    candles.map(candle => candle.component),
+  );
 };
 
 export const createChartScene = (view: View2D) => {
