@@ -8,10 +8,10 @@ export interface GraphProps {
   position?: [number, number];
   isFilled?: boolean;
 }
-export default function (
+const Wave = (
   view: View2D,
   {data, strokeColor, fillColor, position, isFilled = true}: GraphProps,
-) {
+) => {
   const path = createRef<Path>();
   view.add(
     <Path
@@ -41,4 +41,18 @@ export default function (
       yield* path().opacity(targetOpacity, duration);
     },
   };
-}
+};
+
+export const createWave = (
+  view: View2D,
+  position: [number, number],
+  fillColor: string,
+  data: string,
+) => {
+  return Wave(view, {
+    data,
+    fillColor,
+    strokeColor: fillColor,
+    position,
+  });
+};

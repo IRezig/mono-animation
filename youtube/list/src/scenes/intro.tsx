@@ -1,8 +1,8 @@
 import {makeScene2D, Rect, Txt, View2D} from '@motion-canvas/2d';
-import {createRef} from '@motion-canvas/core';
+import {createRef, waitFor} from '@motion-canvas/core';
+import {createChartScene} from '../helpers/create-graph';
 import {createIndicator} from '../helpers/create-indicator';
 import {Colors} from '../styles';
-import {createChartScene} from './chart';
 
 function addBackground(view: View2D) {
   view.add(
@@ -28,7 +28,7 @@ function addTitle(view: View2D) {
       fill={Colors.PROPERTY}
       fontSize={92}
       fontWeight={500}
-      text="eza"
+      // text="eza"
       fontFamily={'JetBrains Mono'}
     />,
   );
@@ -40,19 +40,19 @@ export default makeScene2D(function* (view) {
   // Background
   addBackground(view);
   // Title
-  addTitle(view);
-  // yield* title().text('Crypto', 1);
+  const title = addTitle(view);
+  yield* title().text('Crypto', 1);
 
   // Create waves and flags
   const indicator = createIndicator(view);
   const candleGraph = createChartScene(view);
+  yield* waitFor(2);
+  yield* indicator.line.fadeIn(1, 0.2);
 
   return null;
-
-  // // Animations
+  // Animations
   // yield* all(...candleGraph.map(c => c.animate()));
   // yield* all(
-  //   waves.mw1.fadeIn(1, 0.2),
   //   waves.mw2.fadeIn(1, 0.2),
   //   waves.mw3.fadeIn(1, 0.2),
   // );

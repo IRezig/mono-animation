@@ -12,10 +12,10 @@ export interface CandleProps {
   width?: number;
 }
 
-export default function (
+const Candle = (
   view: View2D,
   {entry, close, high, low, width = 20, x = 0, y = 0}: CandleProps,
-) {
+) => {
   const candleBody = createRef<Rect>();
   const wickLine = createRef<Line>();
 
@@ -54,4 +54,36 @@ export default function (
       yield* candleBody().opacity(1, 0.3);
     },
   };
-}
+};
+
+export const createCandle = (
+  view: View2D,
+  x: number,
+  y: number,
+  isGreen: boolean,
+  basePrice = 100,
+  volatility = 20,
+) => {
+  const bodySize = Math.max(100, Math.random() * volatility);
+  const wickSize = Math.random() * (volatility / 2);
+
+  const entry = basePrice;
+  const close = isGreen ? entry + bodySize : entry - bodySize;
+  const high = Math.max(entry, close) + wickSize;
+  const low = Math.min(entry, close) - wickSize;
+
+  const candle = Candle(view, {
+    entry,
+    close,
+    high,
+    low,
+    x,
+    y,
+    width: 20,
+  });
+
+  return {
+    ...candle,
+    close,
+  };
+};

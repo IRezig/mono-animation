@@ -1,38 +1,5 @@
 import {View2D} from '@motion-canvas/2d';
-import Candle from '../components/Candle';
-import Wave from '../components/Wave';
-
-export const createCandle = (
-  view: View2D,
-  x: number,
-  y: number,
-  isGreen: boolean,
-  basePrice = 100,
-  volatility = 20,
-) => {
-  const bodySize = Math.max(100, Math.random() * volatility);
-  const wickSize = Math.random() * (volatility / 2);
-
-  const entry = basePrice;
-  const close = isGreen ? entry + bodySize : entry - bodySize;
-  const high = Math.max(entry, close) + wickSize;
-  const low = Math.min(entry, close) - wickSize;
-
-  const candle = Candle(view, {
-    entry,
-    close,
-    high,
-    low,
-    x,
-    y,
-    width: 20,
-  });
-
-  return {
-    ...candle,
-    close,
-  };
-};
+import {createCandle} from '../components/Candle';
 
 export const createCandleGraph = (
   view: View2D,
@@ -60,16 +27,22 @@ export const createCandleGraph = (
   });
 };
 
-export const createWave = (
-  view: View2D,
-  position: [number, number],
-  fillColor: string,
-  data: string,
-) => {
-  return Wave(view, {
-    data,
-    fillColor,
-    strokeColor: fillColor,
-    position,
-  });
+export const createChartScene = (view: View2D) => {
+  // Create candle chart
+  const movements = [
+    false,
+    false,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    false,
+    true,
+    false,
+  ];
+
+  return createCandleGraph(view, movements, -410, 0, 100, 30, 20);
 };
