@@ -12,27 +12,27 @@ export default function (
   view: View2D,
   {data, strokeColor, fillColor, position, isFilled = true}: GraphProps,
 ) {
+  // const
   const path = createRef<Path>();
-
   view.add(
     <Path
       ref={path}
       lineWidth={4}
-      stroke={fillColor}
+      stroke={strokeColor}
       data={data}
       position={position}
       scale={0.5}
       start={0}
       opacity={0}
       end={0}
-      fill={isFilled ? strokeColor : undefined}
+      fill={isFilled ? fillColor : undefined}
     />,
   );
 
   return {
     animate: function* (duration = 0) {
       yield* path().end(1, duration);
-      yield* path().fill(strokeColor, duration);
+      yield* path().fill(fillColor, duration);
     },
     fadeIn: function* (targetOpacity = 1, duration = 1) {
       yield* path().end(1, duration);
