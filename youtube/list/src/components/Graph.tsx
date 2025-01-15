@@ -5,13 +5,12 @@ export interface GraphProps {
   data: string;
   strokeColor: string;
   fillColor: string;
-  x?: number;
-  y?: number;
+  position?: [number, number];
   isFilled?: boolean;
 }
 export default function (
   view: View2D,
-  {data, strokeColor, fillColor, x, y, isFilled = true}: GraphProps,
+  {data, strokeColor, fillColor, position, isFilled = true}: GraphProps,
 ) {
   const path = createRef<Path>();
 
@@ -21,7 +20,7 @@ export default function (
       lineWidth={4}
       stroke={fillColor}
       data={data}
-      position={[x, y]}
+      position={position}
       scale={0.5}
       start={0}
       opacity={0}
