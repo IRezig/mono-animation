@@ -52,12 +52,6 @@ export default makeScene2D(function* (view) {
 
   // Animations
   yield* all(...candleGraph.map(c => c.animate()));
-  yield* all(indicator.mw2.fadeIn(1, 0.2), indicator.mw3.fadeIn(1, 0.2));
 
-  yield* all(
-    indicator.mfGreen2.fadeIn(1, 0.2),
-    indicator.mfRed1.fadeIn(1, 0.2),
-    indicator.mfRed2.fadeIn(1, 0.2),
-  );
   yield* waitFor(2);
 });

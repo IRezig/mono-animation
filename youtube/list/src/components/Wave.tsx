@@ -13,7 +13,7 @@ const Wave = (
   {data, strokeColor, fillColor, position, isFilled = true}: GraphProps,
 ) => {
   const path = createRef<Path>();
-  view.add(
+  const component = (
     <Path
       ref={path}
       lineWidth={4}
@@ -22,13 +22,14 @@ const Wave = (
       position={position}
       scale={0.5}
       start={0}
-      opacity={0}
-      end={0}
+      opacity={1}
+      end={1}
       fill={isFilled ? fillColor : undefined}
-    />,
+    />
   );
 
   return {
+    component,
     animate: function* (duration = 0) {
       yield* path().end(1, duration);
       yield* path().fill(fillColor, duration);
