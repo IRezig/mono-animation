@@ -1,6 +1,7 @@
 import {View2D} from '@motion-canvas/2d';
 import {createCandle} from '../components/Candle';
 import {createGroup} from '../components/Group';
+import myGraph from '../mygraph.json';
 
 export const createCandleGraph = (
   view: View2D,
@@ -34,20 +35,9 @@ export const createCandleGraph = (
 
 export const createChartScene = (view: View2D) => {
   // Create candle chart
-  const movements = [
-    false,
-    false,
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-    false,
-    true,
-    false,
-  ];
+  const randomize = () => Array.from({length: 50}, () => Math.random() > 0.5);
+  const movements = myGraph;
+  console.log(JSON.stringify(movements));
 
   return createCandleGraph(view, movements, -410, 0, 100, 30, 20);
 };
