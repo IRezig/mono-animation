@@ -1,8 +1,11 @@
-import {View2D} from '@motion-canvas/2d';
+import {Line, View2D} from '@motion-canvas/2d';
+import {createRef} from '@motion-canvas/core';
 import {Colors} from '../styles';
 import {createWave} from './create-graph';
 
 export const createWaves = (view: View2D) => {
+  const line = createRef<Line>();
+
   const mw1 = createWave(
     view,
     [-220, -20],
@@ -22,7 +25,23 @@ export const createWaves = (view: View2D) => {
     'M 70 440 C 70 440 123.125 1000 240 1000 C 356.875 1000 410 440 410 440',
   );
 
-  return {mw1, mw2, mw3};
+  // Add indicator line
+  view.add(
+    <>
+      <Line
+        ref={line}
+        opacity={0}
+        points={[
+          [200, 160],
+          [100, 50],
+        ]}
+        stroke={'ffb703'}
+        lineWidth={4}
+        radius={40}
+      />
+    </>,
+  );
+  return {mw1, mw2, mw3, line};
 };
 
 export const createFlags = (view: View2D) => {
