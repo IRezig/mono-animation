@@ -3,7 +3,7 @@ import {createRef} from '@motion-canvas/core';
 import {Colors} from '../styles';
 import {createWave} from './create-graph';
 
-export const createWaves = (view: View2D) => {
+export const createIndicator = (view: View2D) => {
   const line = createRef<Line>();
 
   const mw1 = createWave(
@@ -41,10 +41,19 @@ export const createWaves = (view: View2D) => {
       />
     </>,
   );
-  return {mw1, mw2, mw3, line};
-};
 
-export const createFlags = (view: View2D) => {
+  view.add(
+    <Line
+      points={[
+        [-400, 200],
+        [400, 200],
+      ]}
+      stroke={Colors.white}
+      lineWidth={2}
+      lineDash={[3, 3]}
+    />,
+  );
+
   const mfGreen1 = createWave(
     view,
     [0, -160],
@@ -70,5 +79,5 @@ export const createFlags = (view: View2D) => {
     'M304.8,360a21.8,21.8,0,0,1,-40,0l-56,-110.6h0L180,314.6a20,20,0,0,1,-36,0L60,132.6H420Z',
   );
 
-  return {mfGreen1, mfGreen2, mfRed1, mfRed2};
+  return {mfGreen1, mfGreen2, mfRed1, mfRed2, mw1, mw2, mw3, line};
 };

@@ -12,7 +12,6 @@ export default function (
   view: View2D,
   {data, strokeColor, fillColor, position, isFilled = true}: GraphProps,
 ) {
-  // const
   const path = createRef<Path>();
   view.add(
     <Path
